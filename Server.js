@@ -1,17 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const http = require("http");
+const cors = require("cors");
 
 const app = express();
+
+const server = http.createServer(app);
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-/////for uploading image
-const server = http.createServer(app);
-
 ////conecting to database
 const db = "mongodb://localhost:27017/DBname";
 mongoose
@@ -22,12 +20,12 @@ mongoose
   .then(() => console.log(`connection done`))
   .catch((err) => console.log(err));
 
-// const userR = require("./router/userrouter");
+const post = require("./Routes/Post");
 
-// app.use("/api/v1", ParaGorinawaR);
+app.use("/", post);
 
 ////listing the api
-const PORT = 8080;
+const PORT = 5000;
 
 server.listen(PORT, () => {
   console.log(`app is running on ${PORT}`);
