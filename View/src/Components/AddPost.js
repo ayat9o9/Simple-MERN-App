@@ -27,6 +27,11 @@ class AddPost extends Component {
     await axios.post("http://localhost:5000/post", data, {
       "content-type": "application/json",
     });
+    this.setState({
+      title: "",
+      disc: "",
+      edit: null,
+    });
   };
 
   render() {
